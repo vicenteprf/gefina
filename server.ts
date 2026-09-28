@@ -1,12 +1,8 @@
 import http from 'node:http';
+import send from './send.ts'
 
 http.createServer((req, res) => {
-    if(req.url !== '/api/health') {
-    res.writeHead(404, {'content-type': 'application/json'});
-    res.end(JSON.stringify({ message: 'Recurso não encontrado.'}));  
-    return;  
-    }
+    if(req.url !== '/api/health') return send(res, 404, {message: 'Recurso não encontrado.'});
 
-    res.writeHead(200, {'content-type': 'application/json'});
-    res.end(JSON.stringify({ status: 'ok'}));
+    send(res, 200, {status: 'ok'})
 }).listen(3000);
