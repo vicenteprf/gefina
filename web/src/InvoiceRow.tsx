@@ -12,7 +12,7 @@ export default function InvoiceRow(props: InvoiceRowProps) {
             <td>{ props.invoice.amount}</td>
             <td>{ props.invoice.issueDate}</td>
             <td>{ props.invoice.dueDate}</td>
-            <td>{statusLabel( props.invoice.status)}</td>
+            <td>{statusLabel(props.invoice.status)}</td>
         </tr>
     )
 }

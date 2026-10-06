@@ -6,6 +6,7 @@ interface InvoiceTableProps {
 }
 
 export default function InvoiceTable(props: InvoiceTableProps) {
+
     return (
         <table>
             <thead>
@@ -18,9 +19,9 @@ export default function InvoiceTable(props: InvoiceTableProps) {
                 </tr>
             </thead>
             <tbody>
-                {props.invoices.map((invoice => (
-                    <InvoiceRow key={invoice.id} invoice={invoice}/>
-                )))}
+                {props.invoices.map(invoice => (
+                    <InvoiceRow key={invoice.id} invoice={invoice} />
+                ))}
             </tbody>
         </table>
     )
