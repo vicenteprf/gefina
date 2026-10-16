@@ -1,11 +1,12 @@
 import pool from "./database.ts";
-import type { Invoice, InvoiceRow } from "./types.ts";
+import type { Invoice, InvoiceRow } from "./invoiceType.ts";
 
 function toInvoice(row: InvoiceRow): Invoice {
   return {
     id: row.id,
     amount: row.amount,
     status: row.status,
+    situation: row.situation,
     issueDate: row.issue_date,
     dueDate: row.due_date,
     customer: {
@@ -21,8 +22,13 @@ const baseQuery = `
     invoices.id,
     invoices.amount,
     invoices.status,
-    invoices.issue_date,
-    invoices.due_date,
+    CASE
+      WHEN status = 'paid' THEN 'paid'
+      WHEN invoices.due_date < CURRENT_DATE THEN 'overdue'
+      ELSE 'pending'
+    END AS situation,
+    invoices.issue_date::text,
+    invoices.due_date::text,
     customers.id AS customer_id,
     customers.name AS customer_name,
     customers.email AS customer_email
