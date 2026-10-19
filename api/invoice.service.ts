@@ -17,6 +17,10 @@ function toInvoice(row: InvoiceRow): Invoice {
   }
 }
 
+function toInvoices(rows: InvoiceRow[]): Invoice[] {
+  return rows.map(toInvoice);
+}
+
 const baseQuery = `
   SELECT
     invoices.id,
@@ -40,17 +44,35 @@ const baseQuery = `
 export async function findAllInvoice(): Promise<Invoice[]> {
   const connect = await pool.query<InvoiceRow>(`${baseQuery} ORDER BY invoices.issue_date DESC;`);
 
-  return connect.rows.map(toInvoice);
+  return toInvoices(connect.rows);
 }
 
-export async function findInvoiceById(id:number): Promise<Invoice | undefined>{
+export async function findInvoiceById(id: number): Promise<Invoice | undefined> {
   const connect = await pool.query<InvoiceRow>(`${baseQuery} WHERE invoices.id = $1`, [id]);
 
-  if(!connect.rows.length) return undefined;
+  if (!connect.rows.length) return undefined;
 
   return toInvoice(connect.rows[0]);
 }
 
+export async function findRecentInvoice(): Promise<Invoice[]> {
+  const connect = await pool.query<InvoiceRow>(`
+    ${baseQuery}
+    ORDER BY invoices.created_at DESC
+    LIMIT 5`);
+
+  return toInvoices(connect.rows);
+}
+
+export async function findOverdueInvoices(): Promise<Invoice[]> {
+  const connect = await pool.query<InvoiceRow>(`
+    ${baseQuery}
+    WHERE invoices.status = 'pending' AND invoices.due_date < CURRENT_DATE
+    ORDER BY invoices.due_date
+    LIMIT 5`);
+
+  return toInvoices(connect.rows);
+}
 
 
 
