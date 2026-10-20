@@ -1,5 +1,6 @@
-type InvoiceStatus = 'paid' | 'pending';
+export type InvoiceStatus = 'paid' | 'pending';
 type InvoiceSituation = 'paid' | 'pending' | 'overdue';
+
 
 interface Customer {
     id: number;
@@ -28,3 +29,4 @@ export interface InvoiceRow {
     customer_name: string;
     customer_email: string;
 }
+
