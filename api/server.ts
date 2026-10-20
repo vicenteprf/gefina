@@ -32,6 +32,15 @@ app.use('/api/invoices', invoices);
 
 app.use(express.static(dist));
 
+app.use((req, res, next) => {
+  if (req.url.startsWith('/api')) {
+    next();
+    return;
+  }
+
+  res.sendFile(path.join(dist, 'index.html'));
+})
+
 app.use((_req, res) => {
   res.status(404).json({ message: 'Recurso não encontrado.' });
 });
