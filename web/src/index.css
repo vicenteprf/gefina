@@ -1,5 +1,5 @@
 :root {
-  --color-background: #190440;
+  --color-background: #140220;
   --color-surface: #171a21;
   --color-surface-raised: #1f232c;
   --color-border: #2a2f3a;
@@ -26,10 +26,37 @@
   --text-base: 1rem;
   --text-lg: 1.25rem;
   --text-xl: 1.5rem;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-size: var(--text-base);
+  font-family: var(--font-sans);
+}
+
+h1 {
+  font-size: var(--text-xl);
+  font-weight: var(600);
+}
+
+h2 {
+  font-size: var(--text-lg);
+  font-weight: var(600);
+}
+
+th {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+.numeric {
+font-variant-numeric: tabular-nums;
 }
