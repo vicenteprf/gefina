@@ -4,6 +4,10 @@ export function situationLabel(situation: InvoiceSituation) {
    return situation === 'paid' ? 'Pago' : situation === 'overdue' ? 'Atrasado' : 'Pendente';
 }
 
+export function situationClass(situation: InvoiceSituation) {
+   return situation === 'paid' ? 'situation-paid' : situation === 'overdue' ? 'situation-overdue' : 'situation-pending';
+}
+
 export function formatCurrency(cents: number):string {
    const formatter = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
