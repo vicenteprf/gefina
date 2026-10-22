@@ -8,10 +8,10 @@ export function situationClass(situation: InvoiceSituation) {
    return situation === 'paid' ? 'situation-paid' : situation === 'overdue' ? 'situation-overdue' : 'situation-pending';
 }
 
-export function formatCurrency(cents: number): string {
+export function formatCurrency(cents: number):string {
    const formatter = new Intl.NumberFormat('pt-BR', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
+      style: 'currency',
+      currency: 'BRL'
    })
 
    return formatter.format(cents / 100)
