@@ -29,7 +29,7 @@
 
   --font-sans: 'Inter', system-ui, sans-serif;
 
-  --sidebar-width: 240px
+  --sidebar-width: 240px;
 }
 
 * {
@@ -55,7 +55,7 @@ h1 {
 
 h2 {
   font-size: var(--text-lg);
-  font-weight: var(600);
+  font-weight: 600;
   margin-bottom: var(--space-3);
 }
 
@@ -88,9 +88,9 @@ a {
 }
 
 .menu ul {
-display: flex;
-flex-direction: column;
-gap: var(--space-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 
 }
 
@@ -102,7 +102,9 @@ gap: var(--space-1);
   transition: 0.25s;
 }
 
-.menu a:hover, .menu a:focus-visible, .menu a.active {
+.menu a:hover,
+.menu a:focus-visible,
+.menu a.active {
   background-color: var(--color-surface-raised);
   color: var(--color-text);
 }
@@ -157,7 +159,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-3);
 }
@@ -171,13 +174,13 @@ th, td {
 }
 
 .situation-pending {
-  color: var(--color-pending)
+  color: var(--color-pending);
 }
 
 .situation-paid {
-  color: var(--color-paid)
+  color: var(--color-paid);
 }
 
 .situation-overdue {
-  color: var(--color-overdue)
+  color: var(--color-overdue);
 }
