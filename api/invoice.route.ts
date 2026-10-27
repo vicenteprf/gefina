@@ -1,32 +1,99 @@
 import { Router } from 'express';
-import { findAllInvoice, findInvoiceById } from './invoice.service.ts';
-
+import { findAllInvoice, findInvoiceById, insertInvoice, modifyInvoice, removeInvoice } from './invoice.service.ts';
+import parseId from './utils.ts';
 
 const router = Router();
 
 router.get('/', async (_req, res) => {
-  try {
-    const invoices = await findAllInvoice();
+  const invoices = await findAllInvoice();
 
-    res.status(200).json(invoices);
-  } catch (e) {
-    console.error(e)
-    res.status(500).json({ error: { message: { status: 500, message: 'Não foi possível carregar as faturas.' } } })
-  }
+  res.status(200).json(invoices);
 });
 
 router.get('/:id', async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const invoice = await findInvoiceById(id);
+  const id = parseId(req.params.id);
 
-    if (!invoice) res.status(404).json({ error: { status: 404, message: 'Fatura não encontrada.' } });
+  if (!id) {
+    res.status(400).json({
+      error: {
+        status: 400,
+        message: 'Identificador inválido.'
+      }
+    })
 
-    res.status(200).json(invoice);
-  } catch (e) {
-    console.error(e)
-    res.status(500).json({ error: { status: 500, message: 'Não foi possível carregar as faturas.' } })
+    return;
   }
+
+  const invoice = await findInvoiceById(id);
+
+  if (!invoice) res.status(404).json({ error: { status: 404, message: 'Fatura não encontrada.' } });
+
+  res.status(200).json(invoice);
 });
+
+router.post('/', async (req, res) => {
+  const data = req.body;
+
+  const invoice = await insertInvoice(data);
+
+  if (!invoice) {
+    res.status(404).json({ error: { status: 404, message: 'Fatura não encontrada.' } });
+  }
+
+  res.status(201).json(invoice);
+});
+
+router.put('/:id', async (req, res) => {
+ const id = parseId(req.params.id);
+
+  if (!id) {
+    res.status(400).json({
+      error: {
+        status: 400,
+        message: 'Identificador inválido.'
+      }
+    })
+
+    return;
+  }
+  
+  const data = req.body;
+
+  const invoice = await modifyInvoice(id, data);
+
+  if (!invoice) {
+    res.status(404).json({ error: { status: 404, message: 'Fatura não encontrada.' } })
+  }
+
+  res.status(200).json(invoice);
+})
+
+router.delete('/:id', async (req, res) => {
+  const id = parseId(req.params.id);
+
+  if (!id) {
+    res.status(400).json({
+      error: {
+        status: 400,
+        message: 'Identificador inválido.'
+      }
+    })
+
+    return;
+  }
+
+  const deleted = await removeInvoice(id);
+
+  if (!deleted) {
+    res.status(404).json({
+      error: {
+        status: 404,
+        message: 'Fatura não encontrada.'
+      }
+    })
+  }
+
+  res.status(204).end();
+})
 
 export default router;
