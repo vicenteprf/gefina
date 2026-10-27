@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { findAllInvoice, findInvoiceById, insertInvoice, modifyInvoice, removeInvoice } from './invoice.service.ts';
+import parseId from './utils.ts';
 
 const router = Router();
 
@@ -10,7 +11,19 @@ router.get('/', async (_req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const id = Number(req.params.id);
+  const id = parseId(req.params.id);
+
+  if (!id) {
+    res.status(400).json({
+      error: {
+        status: 400,
+        message: 'Identificador inválido.'
+      }
+    })
+
+    return;
+  }
+
   const invoice = await findInvoiceById(id);
 
   if (!invoice) res.status(404).json({ error: { status: 404, message: 'Fatura não encontrada.' } });
@@ -31,7 +44,19 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  const id = Number(req.params.id);
+ const id = parseId(req.params.id);
+
+  if (!id) {
+    res.status(400).json({
+      error: {
+        status: 400,
+        message: 'Identificador inválido.'
+      }
+    })
+
+    return;
+  }
+  
   const data = req.body;
 
   const invoice = await modifyInvoice(id, data);
@@ -44,7 +69,19 @@ router.put('/:id', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-  const id = Number(req.params.id)
+  const id = parseId(req.params.id);
+
+  if (!id) {
+    res.status(400).json({
+      error: {
+        status: 400,
+        message: 'Identificador inválido.'
+      }
+    })
+
+    return;
+  }
+
   const deleted = await removeInvoice(id);
 
   if (!deleted) {
