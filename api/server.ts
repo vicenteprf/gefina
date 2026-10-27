@@ -3,6 +3,7 @@ import path from 'node:path';
 import pool from './database.ts';
 import invoices from './invoice.route.ts';
 import dashboard from './dashboard.route.ts';
+import handleError  from './error.middlewares.ts';
 
 const app = express();
 app.use(express.json());
@@ -45,5 +46,7 @@ app.use((req, res, next) => {
 app.use((_req, res) => {
   res.status(404).json({ message: 'Recurso não encontrado.' });
 });
+
+app.use(handleError);
 
 app.listen(Number(process.env.PORT) || 3000);
