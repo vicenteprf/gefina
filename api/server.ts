@@ -3,6 +3,7 @@ import path from 'node:path';
 import pool from './database.ts';
 import invoices from './invoice.route.ts';
 import dashboard from './dashboard.route.ts';
+import  customers  from './customers.route.ts';
 import handleError  from './error.middlewares.ts';
 
 const app = express();
@@ -31,6 +32,7 @@ app.get('/api/health', async (_req, res) => {
 
 app.use('/api/dashboard', dashboard);
 app.use('/api/invoices', invoices);
+app.use('/api/customers', customers);
 
 app.use(express.static(dist));
 
