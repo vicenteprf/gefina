@@ -24,3 +24,4 @@ export interface InvoiceSummaryTableProps {
     invoices: Invoice[];
     date: (invoice: Invoice) => string;
 }
+
