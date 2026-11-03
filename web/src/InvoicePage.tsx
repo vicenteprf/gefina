@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import type { Invoice, InvoiceInput } from './invoiceType.ts';
 import InvoiceTable from './InvoiceTable.tsx';
 import InvoiceForm from './InvoiceForm.tsx';
-import { getAllInvoices, createInvoice } from './invoiceApi.ts';
+import { getAllInvoices, createInvoice, updateInvoice } from './invoiceApi.ts';
 import type { CustomerOption } from './customerType.ts';
 
 export default function InvoicePage() {
@@ -12,7 +12,9 @@ export default function InvoicePage() {
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [dialogContent, setDialogContent] = useState(false)
+  const [dialogContent, setDialogContent] = useState(false);
+  const [target, setTarget] = useState<Invoice | null>(null)
+
 
   const dialogRef = useRef<HTMLDialogElement>(null)
 
@@ -49,9 +51,11 @@ export default function InvoicePage() {
     getCustomersOptions();
   }, [])
 
-  function openDialog() {
+  function openDialog(invoice: Invoice | null) {
+    setTarget(invoice);
     setFormError(null);
     setDialogContent(true);
+
     dialogRef.current?.showModal();
   }
 
@@ -77,7 +81,11 @@ export default function InvoicePage() {
     setFormError(null);
 
     try {
-      await createInvoice(datas);
+      if(!target) {
+        await createInvoice(datas);
+      } else {
+        await updateInvoice(target.id, datas);
+      }
       closesDialog();
       await refresh();
     } catch (e) {
@@ -95,11 +103,18 @@ export default function InvoicePage() {
     <>
       <header className='page-header'>
         <h1>Faturas</h1>
-        <button className='button-primary' onClick={openDialog}>Nova fatura</button>
+        <button
+          className='button-primary'
+          type='button'
+          onClick={() => openDialog(null)}
+        >Nova fatura</button>
       </header>
 
       <div className='panel'>
-        <InvoiceTable invoices={invoices} />
+        <InvoiceTable
+          invoices={invoices}
+          edit={openDialog}
+        />
       </div>
 
       <dialog
@@ -108,7 +123,7 @@ export default function InvoicePage() {
         onClose={() => setDialogContent(false)}
       >
         {dialogContent && <InvoiceForm
-          invoice={null}
+          invoice={target}
           customers={customersOptions}
           error={formError}
           onDelete={() => null}
