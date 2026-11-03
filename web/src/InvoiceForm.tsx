@@ -10,6 +10,7 @@ export default function InvoiceForm(props: InvoiceFormProps) {
 
     function handleSubmit(e: SubmitEvent) {
         e.preventDefault();
+        props.setConfirmDelete(false);
 
         props.onSubmit({
             customerId: Number(customerId),
@@ -99,7 +100,7 @@ export default function InvoiceForm(props: InvoiceFormProps) {
                     disabled={props.busy}
                     onClick={props.onDelete}
                 >
-                    Excluir
+                    {props.busy && props.confirmDelete ? 'Excluindo...' : 'Excluir'}
                 </button>}
                 <button
                     className='button-secondary'
@@ -114,10 +115,28 @@ export default function InvoiceForm(props: InvoiceFormProps) {
                     type='submit'
                     disabled={props.busy}
                 >
-                    {props.busy ? 'Salvando...' : 'Salvar'}
+                    {props.busy && !props.confirmDelete ? 'Salvando...' : 'Salvar'}
                 </button>
             </div>
 
+            {props.confirmDelete && (
+                <div className='confirm-form'>
+                    <p>A exclusão é definitiva e não pode ser desfeita. Deseja prosseguir?</p>
+
+                    <button
+                        className='button-secondary'
+                        type='button'
+                        disabled={props.busy}
+                        onClick={() => props.setConfirmDelete(false)}
+                    >Não</button>
+                    <button
+                        className='button-danger'
+                        type='button'
+                        disabled={props.busy}
+                        onClick={props.confirm}
+                    >Sim</button>
+                </div>
+            )}
         </form>
     )
 }

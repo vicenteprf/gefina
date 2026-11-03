@@ -1,3 +1,4 @@
+import type { SetStateAction } from 'react';
 import type { CustomerOption } from './customerType.ts';
 
 export type InvoiceStatus = 'pending' | 'paid';
@@ -32,6 +33,9 @@ export interface InvoiceFormProps {
   customers: CustomerOption[];
   error: string | null;
   onDelete: () => void;
+  confirmDelete: boolean;
+  setConfirmDelete: React.Dispatch<SetStateAction<boolean>>;
+  confirm: () => void;
   onCancel: () => void;
   onSubmit: (values: InvoiceInput) => void;
   busy: boolean;

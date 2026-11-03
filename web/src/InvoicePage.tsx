@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import type { Invoice, InvoiceInput } from './invoiceType.ts';
 import InvoiceTable from './InvoiceTable.tsx';
 import InvoiceForm from './InvoiceForm.tsx';
-import { getAllInvoices, createInvoice, updateInvoice } from './invoiceApi.ts';
+import { getAllInvoices, createInvoice, updateInvoice, deleteInvoice } from './invoiceApi.ts';
 import type { CustomerOption } from './customerType.ts';
 
 export default function InvoicePage() {
@@ -14,6 +14,7 @@ export default function InvoicePage() {
   const [loading, setLoading] = useState(true);
   const [dialogContent, setDialogContent] = useState(false);
   const [target, setTarget] = useState<Invoice | null>(null)
+  const [confirmDelete, setConfirmDelete] = useState(false)
 
 
   const dialogRef = useRef<HTMLDialogElement>(null)
@@ -81,7 +82,7 @@ export default function InvoicePage() {
     setFormError(null);
 
     try {
-      if(!target) {
+      if (!target) {
         await createInvoice(datas);
       } else {
         await updateInvoice(target.id, datas);
@@ -90,9 +91,28 @@ export default function InvoicePage() {
       await refresh();
     } catch (e) {
       if (e instanceof Error) setFormError(e.message);
+    } finally {
+      setBusy(false)
     }
 
-    setBusy(false)
+  }
+
+  async function confirm() {
+    if (!target) return;
+
+    setBusy(true);
+    setFormError(null);
+
+    try {
+      await deleteInvoice(target.id);
+      closesDialog();
+      await refresh();
+    } catch (e) {
+      if (e instanceof Error) setFormError(e.message);
+    } finally {
+      setBusy(false);
+    }
+
   }
 
   if (loading) return <p>carregando faturas...</p>
@@ -120,13 +140,19 @@ export default function InvoicePage() {
       <dialog
         className='invoice-modal'
         ref={dialogRef}
-        onClose={() => setDialogContent(false)}
+        onClose={() => {
+          setDialogContent(false);
+          setConfirmDelete(false);
+        }}
       >
         {dialogContent && <InvoiceForm
           invoice={target}
           customers={customersOptions}
           error={formError}
-          onDelete={() => null}
+          onDelete={() => setConfirmDelete(true)}
+          confirmDelete={confirmDelete}
+          setConfirmDelete={setConfirmDelete}
+          confirm={confirm}
           onCancel={closesDialog}
           onSubmit={submit}
           busy={busy}
