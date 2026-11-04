@@ -1,6 +1,6 @@
 import pool from './database.ts';
 import type { Resource, Dashboard } from './dashboardType.ts';
-import type { InvoiceStatus } from './invoiceType.ts';
+import type { InvoiceStatus } from './invoice.schema.ts';
 import { findRecentInvoice, findOverdueInvoices } from './invoice.service.ts'
 
 async function sumAmountByStatus(status: InvoiceStatus): Promise<number> {

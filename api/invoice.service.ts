@@ -1,5 +1,6 @@
 import pool from "./database.ts";
-import type { Invoice, InvoiceRow, InvoiceInput } from "./invoiceType.ts";
+import type { Invoice, InvoiceRow } from "./invoiceType.ts";
+import type { InvoiceInput } from "./invoice.schema.ts";
 
 function toInvoice(row: InvoiceRow): Invoice {
   return {

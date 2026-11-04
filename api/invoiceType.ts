@@ -1,4 +1,4 @@
-export type InvoiceStatus = 'paid' | 'pending';
+import type { InvoiceStatus } from "./invoice.schema.ts";
 type InvoiceSituation = 'paid' | 'pending' | 'overdue';
 
 
@@ -30,10 +30,4 @@ export interface InvoiceRow {
     customer_email: string;
 }
 
-export interface InvoiceInput {
-    customerId: string;
-    amount: number;
-    status: InvoiceStatus;
-    issueDate: string;
-    dueDate: string;
-}
+
