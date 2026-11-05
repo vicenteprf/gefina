@@ -32,6 +32,7 @@ export interface InvoiceFormProps {
   invoice: Invoice | null;
   customers: CustomerOption[];
   error: string | null;
+  fieldErrors: InvoiceFieldErrors;
   onDelete: () => void;
   confirmDelete: boolean;
   setConfirmDelete: React.Dispatch<SetStateAction<boolean>>;
@@ -39,4 +40,17 @@ export interface InvoiceFormProps {
   onCancel: () => void;
   onSubmit: (values: InvoiceInput) => void;
   busy: boolean;
+}
+
+export interface InvoiceFieldErrors {
+  customerId?: string;
+  amount?: string;
+  status?: string;
+  issueDate?: string;
+  dueDate?: string;
+}
+
+export interface ApiFailure {
+  message: string;
+  fields: InvoiceFieldErrors;
 }

@@ -1,14 +1,24 @@
 import { useEffect, useState, useRef } from 'react';
-import type { Invoice, InvoiceInput } from './invoiceType.ts';
+import type {
+  Invoice,
+  InvoiceFieldErrors,
+  InvoiceInput
+} from './invoiceType.ts';
 import InvoiceTable from './InvoiceTable.tsx';
 import InvoiceForm from './InvoiceForm.tsx';
-import { getAllInvoices, createInvoice, updateInvoice, deleteInvoice } from './invoiceApi.ts';
+import { 
+  getAllInvoices, 
+  createInvoice, 
+  updateInvoice, 
+  deleteInvoice 
+} from './invoiceApi.ts';
 import type { CustomerOption } from './customerType.ts';
 
 export default function InvoicePage() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [customersOptions, setCustomersOptions] = useState<CustomerOption[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<InvoiceFieldErrors>({})
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -83,7 +93,9 @@ export default function InvoicePage() {
 
     try {
       if (!target) {
-        await createInvoice(datas);
+        const failure = await createInvoice(datas);
+
+        if (failure) return setFieldErrors(failure.fields);
       } else {
         await updateInvoice(target.id, datas);
       }
@@ -143,12 +155,14 @@ export default function InvoicePage() {
         onClose={() => {
           setDialogContent(false);
           setConfirmDelete(false);
+          setFieldErrors({})
         }}
       >
         {dialogContent && <InvoiceForm
           invoice={target}
           customers={customersOptions}
           error={formError}
+          fieldErrors={fieldErrors}
           onDelete={() => setConfirmDelete(true)}
           confirmDelete={confirmDelete}
           setConfirmDelete={setConfirmDelete}
