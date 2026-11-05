@@ -2,7 +2,7 @@ import { useState, type SubmitEvent } from 'react';
 import type { InvoiceFormProps, InvoiceStatus } from './invoiceType.ts'
 
 export default function InvoiceForm(props: InvoiceFormProps) {
-    const [customerId, setCustomerId] = useState(!props.invoice ? '' : props.invoice.customer.id);
+    const [customerId, setCustomerId] = useState(!props.invoice ? undefined : String(props.invoice.customer.id));
     const [amount, setAmount] = useState(!props.invoice ? '' : (props.invoice.amount / 100).toFixed(2));
     const [status, setStatus] = useState<InvoiceStatus>(!props.invoice ? 'pending' : props.invoice.status);
     const [issueDate, setIssueDate] = useState(!props.invoice ? '' : props.invoice.issueDate);
@@ -26,13 +26,14 @@ export default function InvoiceForm(props: InvoiceFormProps) {
             <h2>{!props.invoice ? 'Criar fatura' : 'Editar fatura'}</h2>
 
             <div className='field'>
-                <label htmlFor='customer' >Cliente</label>
+                <label htmlFor='customer'>Cliente</label>
                 <select
                     id='customer'
                     value={customerId}
                     onChange={(e) => setCustomerId(e.target.value)}
+                    required
                 >
-                    <option>Selecione um cliente</option>
+                    <option value='' >Selecione um cliente</option>
                     {props.customers.map((customer) => (
                         <option key={customer.id} value={customer.id}>
                             {customer.name} — {customer.email}
@@ -91,8 +92,6 @@ export default function InvoiceForm(props: InvoiceFormProps) {
                 </div>
             </div>
 
-            {!props.error ? null : <p className='form-error'>{props.error}</p>}
-
             <div className='form-actions'>
                 {!props.invoice ? null : <button
                     className='button-danger'
@@ -137,6 +136,14 @@ export default function InvoiceForm(props: InvoiceFormProps) {
                     >Sim</button>
                 </div>
             )}
+
+            
+            {props.error && <p className='form-error'>{props.error}</p>}
+            {props.fieldErrors.customerId && <p className='form-error'>{props.fieldErrors.customerId}</p>}
+            {props.fieldErrors.amount && <p className='form-error'>{props.fieldErrors.amount}</p>}
+            {props.fieldErrors.status && <p className='form-error'>{props.fieldErrors.status}</p>}
+            {props.fieldErrors.issueDate && <p className='form-error'>{props.fieldErrors.issueDate}</p>}
+            {props.fieldErrors.dueDate && <p className='form-error'>{props.fieldErrors.dueDate}</p>}
         </form>
     )
 }
