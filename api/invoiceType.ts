@@ -1,12 +1,10 @@
+import type {
+  Invoice as InvoiceRecord,
+  Customer as CustomerRecord
+} from '@prisma/client';
 import type { InvoiceStatus } from "./invoice.schema.ts";
-type InvoiceSituation = 'paid' | 'pending' | 'overdue';
 
-
-interface Customer {
-    id: number;
-    name: string;
-    email: string;
-}
+export type InvoiceSituation = 'paid' | 'pending' | 'overdue';
 
 export interface Invoice {
     id: number;
@@ -15,7 +13,11 @@ export interface Invoice {
     situation: InvoiceSituation,
     issueDate: string;
     dueDate: string;
-    customer: Customer;
+    customer: {
+        id: number;
+        name: string;
+        email: string;
+    };
 }
 
 export interface InvoiceRow {
@@ -31,3 +33,4 @@ export interface InvoiceRow {
 }
 
 
+export type InvoiceWithCustomer = InvoiceRecord & {customer: CustomerRecord};
