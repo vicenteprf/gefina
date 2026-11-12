@@ -1,11 +1,11 @@
-import express from 'express';
+import fs from 'node:fs';
 import path from 'node:path';
-import fs from 'node:fs'
-import prisma from './prisma.ts';
-import invoices from './invoice.route.ts';
-import dashboard from './dashboard.route.ts';
+import express from 'express';
 import customers from './customers.route.ts';
-import handleError from './error.middlewares.ts'
+import dashboard from './dashboard.route.ts';
+import handleError from './error.middlewares.ts';
+import invoices from './invoice.route.ts';
+import prisma from './prisma.ts';
 
 const app = express();
 app.use(express.json());
@@ -23,15 +23,15 @@ app.get('/api/health', async (_req, res) => {
 
     res.status(200).json({
       server: 'server is runnig.',
-      database: 'Database avaliable.'
+      database: 'Database avaliable.',
     });
   } catch (e) {
     console.error(e);
 
     res.status(500).json({
       status: 'Server is running',
-      database: 'unvaliable'
-    })
+      database: 'unvaliable',
+    });
   }
 });
 
@@ -51,14 +51,14 @@ app.use((req, res, next) => {
   }
 
   res.sendFile(path.join(dist, 'index.html'));
-})
+});
 
 app.use((_req, res) => {
   res.status(404).json({
     error: {
       status: 404,
-      message: 'Recurso não encontrado.'
-    }
+      message: 'Recurso não encontrado.',
+    },
   });
 });
 

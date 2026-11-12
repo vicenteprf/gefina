@@ -1,8 +1,7 @@
 export default function parseId(value: string): number | undefined {
-    const id = Number(value)
+  const id = Number(value);
 
-    if (!Number.isInteger(id) || id < 1) return undefined;
+  if (!Number.isInteger(id) || id < 1) return undefined;
 
-    return id;
+  return id;
 }
-

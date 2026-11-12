@@ -28,7 +28,7 @@
   --text-lg: 1.25rem;
   --text-xl: 1.5rem;
 
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 
   --sidebar-width: 240px;
 }
@@ -92,7 +92,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-
 }
 
 .menu a {
@@ -195,6 +194,57 @@ td {
   color: var(--color-overdue);
 }
 
+input,
+select,
+button {
+  font-family: inherit;
+  font-size: var(--text-base);
+  border-radius: var(--radius-control);
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+input,
+select {
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-surface-raised);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+button {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.button-primary {
+  color: var(--color-text);
+  background-color: var(--color-primary);
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.button-danger {
+  background-color: transparent;
+  color: var(--color-overdue);
+  border-color: var(--color-overdue);
+}
+
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -268,57 +318,6 @@ form {
 .form-error {
   font-size: var(--text-sm);
   color: var(--color-overdue);
-}
-
-input,
-select,
-button {
-  font-family: inherit;
-  font-size: var(--text-base);
-  border-radius: var(--radius-control)
-}
-
-input:focus-visible,
-select:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-input,
-select {
-  padding: var(--space-2) var(--space-3);
-  background-color: var(--color-surface-raised);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-}
-
-button {
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: default;
-  opacity: 0.75;
-}
-
-.button-primary {
-  color: var(--color-text);
-  background-color: var(--color-primary);
-}
-
-.button-secondary {
-  background-color: transparent;
-  color: var(--color-text);
-  border-color: var(--color-border);
-}
-
-.button-danger {
-  background-color: transparent;
-  color: var(--color-overdue);
-  border-color: var(--color-overdue);
 }
 
 .form-error {
