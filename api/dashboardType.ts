@@ -1,16 +1,12 @@
-import type { Invoice } from "./invoiceType.ts";
+import type { Invoice } from './invoiceType.ts';
 
-export type Resource = 'invoices' | 'customers';
-
-interface DashboardTotals {
+export interface Dashboard {
+  totals: {
     paid: number;
     pending: number;
     invoiceCount: number;
-    customersCount: number
-}
-
-export interface Dashboard {
-    totals: DashboardTotals;
-    recentInvoices: Invoice[];
-    overdueInvoices: Invoice[];
+    customersCount: number;
+  };
+  recentInvoices: Invoice[];
+  overdueInvoices: Invoice[];
 }

@@ -1,31 +1,37 @@
 import type { InvoiceSummaryTableProps } from './dashboardType.ts';
 import { formatCurrency, formatDate } from './utils.ts';
 
-export default function InvoiceSummaryTable(props: InvoiceSummaryTableProps) {
-    return (
-        <div className='panel'>
-            <h2>{props.title}</h2>
+export default function InvoiceSummaryTable(
+  props: InvoiceSummaryTableProps,
+) {
+  return (
+    <div className="panel">
+      <h2>{props.title}</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Valor</th>
-                        <th className='numeric-date'>{props.dataLabel}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.invoices.map(invoice => {
-                        return (
-                            <tr key={invoice.id}>
-                                <td>{invoice.customer.name}</td>
-                                <td className='numeric'>{formatCurrency(invoice.amount)}</td>
-                                <td className='numeric numeric-date'>{formatDate(props.date(invoice))}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
-    )
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Valor</th>
+            <th className="numeric-date">{props.dataLabel}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.invoices.map((invoice) => {
+            return (
+              <tr key={invoice.id}>
+                <td>{invoice.customer.name}</td>
+                <td className="numeric">
+                  {formatCurrency(invoice.amount)}
+                </td>
+                <td className="numeric numeric-date">
+                  {formatDate(props.date(invoice))}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }
