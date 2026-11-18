@@ -134,23 +134,23 @@ export default function InvoicePage() {
 
   return (
     <>
-      <header className="page-header">
-        <h1>Faturas</h1>
+      <header className='flex justify-between items-center mb-6'>
+        <h1 className='text-xl font-semibold'>Faturas</h1>
         <button
-          className="button-primary"
-          type="button"
+          className='bg-primary px-4 py-2 rounded-control cursor-pointer'
+          type='button'
           onClick={() => openDialog(null)}
         >
           Nova fatura
         </button>
       </header>
 
-      <div className="panel">
+      <div className='p-4 bg-surface border border-border rounded-surface'>
         <InvoiceTable invoices={invoices} edit={openDialog} />
       </div>
 
       <dialog
-        className="invoice-modal"
+        className='invoice-modal'
         ref={dialogRef}
         onClose={() => {
           setDialogContent(false);

@@ -41,36 +41,36 @@ export default function DashboardPage() {
     <div>
       <h1>Painel Inicial</h1>
 
-      <div className="summary-cards">
+      <div className='flex gap-4'>
         <SummaryCard
-          label="total recebido:"
+          label='total recebido:'
           value={formatCurrency(dashboard.totals.paid)}
         />
         <SummaryCard
-          label="total pendente:"
+          label='total pendente:'
           value={formatCurrency(dashboard.totals.pending)}
         />
         <SummaryCard
-          label="Faturas:"
+          label='Faturas:'
           value={String(dashboard.totals.invoiceCount)}
         />
         <SummaryCard
-          label="Clientes:"
+          label='Clientes:'
           value={String(dashboard.totals.customersCount)}
         />
       </div>
 
-      <div className="summary-tables">
+      <div className='flex gap-6 mt-8'>
         <InvoiceSummaryTable
-          title="Faturas Recentes"
-          dataLabel="Emissão"
+          title='Faturas Recentes'
+          dataLabel='Emissão'
           invoices={dashboard.recentInvoices}
           date={(invoice) => invoice.issueDate}
         />
 
         <InvoiceSummaryTable
-          title="Faturas Pendentes"
-          dataLabel="Vencimento"
+          title='Faturas Pendentes'
+          dataLabel='Vencimento'
           invoices={dashboard.overdueInvoices}
           date={(invoice) => invoice.dueDate}
         />
