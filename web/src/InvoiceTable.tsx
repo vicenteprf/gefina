@@ -7,16 +7,18 @@ interface InvoiceTableProps {
 }
 
 export default function InvoiceTable(props: InvoiceTableProps) {
+  const base = 'text-sm font-medium p-3 border-b border-border text-text-muted';
+
   return (
-    <table>
+    <table className='w-full border-collapse'>
       <thead>
         <tr>
-          <th>Cliente</th>
-          <th>Valor</th>
-          <th className="numeric-date">Data da emissão</th>
-          <th className="numeric-date">Data de vencimento</th>
-          <th>Situação</th>
-          <th></th>
+          <th className={`${base} text-left`}>Cliente</th>
+          <th className={`${base} text-left`}>Valor</th>
+          <th className={base}>Data da emissão</th>
+          <th className={base}>Data de vencimento</th>
+          <th className={base}>Situação</th>
+          <th className={base}></th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +30,6 @@ export default function InvoiceTable(props: InvoiceTableProps) {
           />
         ))}
       </tbody>
-    </table>
+    </table >
   );
 }

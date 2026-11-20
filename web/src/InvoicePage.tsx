@@ -128,29 +128,29 @@ export default function InvoicePage() {
     }
   }
 
-  if (loading) return <p>carregando faturas...</p>;
+  if (loading) return <p className='text-sm text-text-muted'>carregando...</p>;
 
-  if (error) return <p>{error}</p>;
+  if (error) return <p className='text-overdue'>{error}</p>;
 
   return (
     <>
-      <header className="page-header">
-        <h1>Faturas</h1>
+      <header className='flex justify-between items-center mb-6'>
+        <h1 className='text-xl font-semibold'>Faturas</h1>
         <button
-          className="button-primary"
-          type="button"
+          className="bg-primary px-4 py-2 rounded-control cursor-pointer focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-primary focus-visible:outline-offset-2"
+          type='button'
           onClick={() => openDialog(null)}
         >
           Nova fatura
         </button>
       </header>
 
-      <div className="panel">
+      <div className='p-4 bg-surface border border-border rounded-surface'>
         <InvoiceTable invoices={invoices} edit={openDialog} />
       </div>
 
       <dialog
-        className="invoice-modal"
+        className='m-auto w-xl bg-surface backdrop:bg-background-brackdrop backdrop:backdrop-blur-xs border border-border text-text p-6 rounded-dialog focus-visible:outline-2 focus-visible:outline-primary'
         ref={dialogRef}
         onClose={() => {
           setDialogContent(false);

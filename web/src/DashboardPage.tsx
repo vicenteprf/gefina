@@ -33,48 +33,50 @@ export default function DashboardPage() {
     getDashboard();
   }, []);
 
-  if (loading) return <p>carregando painel inicial...</p>;
+  if (loading) return <p className='text-sm text-text-muted'>carregando...</p>;
 
-  if (error !== null || dashboard === null) return <p>{error}</p>;
+  if (error !== null || dashboard === null) return <p className='text-overdue'>{error}</p>;
 
   return (
-    <div>
-      <h1>Painel Inicial</h1>
+    <>
+      <h1 className='text-xl font-semibold mb-7'>Painel Inicial</h1>
 
-      <div className="summary-cards">
+      <div className='flex gap-4'>
         <SummaryCard
-          label="total recebido:"
+          label='total recebido:'
           value={formatCurrency(dashboard.totals.paid)}
         />
         <SummaryCard
-          label="total pendente:"
+          label='total pendente:'
           value={formatCurrency(dashboard.totals.pending)}
         />
         <SummaryCard
-          label="Faturas:"
+          label='Faturas:'
           value={String(dashboard.totals.invoiceCount)}
         />
         <SummaryCard
-          label="Clientes:"
+          label='Clientes:'
           value={String(dashboard.totals.customersCount)}
         />
       </div>
 
-      <div className="summary-tables">
+      <div className='flex gap-6 mt-8'>
         <InvoiceSummaryTable
-          title="Faturas Recentes"
-          dataLabel="Emissão"
+          title='Faturas Recentes'
+          dataLabel='Emissão'
           invoices={dashboard.recentInvoices}
           date={(invoice) => invoice.issueDate}
         />
 
         <InvoiceSummaryTable
-          title="Faturas Pendentes"
-          dataLabel="Vencimento"
+          title='Faturas Pendentes'
+          dataLabel='Vencimento'
           invoices={dashboard.overdueInvoices}
           date={(invoice) => invoice.dueDate}
         />
       </div>
-    </div>
+
+      <small className='fixed bottom-0 left-[calc(50%+120px)] -translate-x-1/2 text-text-muted'>&copy; 2026. Gefina - Gestão financeira simples e eficiente.</small>
+    </>
   );
 }
