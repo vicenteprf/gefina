@@ -1,35 +1,38 @@
-import type { InvoiceSituation } from './invoiceType';
+import type { InvoiceSituation } from "./invoiceType";
 
 export function situationLabel(situation: InvoiceSituation) {
-  return situation === 'paid'
-    ? 'Pago'
-    : situation === 'overdue'
-      ? 'Atrasado'
-      : 'Pendente';
+  return situation === "paid"
+    ? "Pago"
+    : situation === "overdue"
+      ? "Atrasado"
+      : "Pendente";
 }
 
 export function situationClass(situation: InvoiceSituation) {
-  return situation === 'paid'
-    ? 'text-paid'
-    : situation === 'overdue'
-      ? 'text-overdue'
-      : 'text-pending';
+  return situation === "paid"
+    ? "text-paid"
+    : situation === "overdue"
+      ? "text-overdue"
+      : "text-pending";
 }
 
 export function formatCurrency(cents: number): string {
-  const formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
+  const formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
   });
 
-  return formatter.format(cents / 100);
+  return formatter
+    .format(cents / 100)
+    .slice(2)
+    .trim();
 }
 
 export function formatDate(isoDate: string): string {
-  const formatter = new Intl.DateTimeFormat('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
+  const formatter = new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
   });
 
   return formatter.format(new Date(`${isoDate}T00:00:00`));

@@ -1,10 +1,10 @@
-import type { Invoice } from './invoiceType.ts';
+import type { Invoice } from "./invoiceType.ts";
 import {
   formatCurrency,
   formatDate,
   situationClass,
   situationLabel,
-} from './utils.ts';
+} from "./utils.ts";
 
 interface InvoiceRowProps {
   invoice: Invoice;
@@ -12,13 +12,16 @@ interface InvoiceRowProps {
 }
 
 export default function InvoiceRow(props: InvoiceRowProps) {
-  const base = 'p-3 border-b border-border';
+  const base = "p-3 border-b border-border";
 
   return (
     <tr>
       <td className={base}>{props.invoice.customer.name}</td>
       <td className={`${base} tabular-nums`}>
-        {formatCurrency(props.invoice.amount)}
+        <div className="flex justify-between">
+          <span>R$</span>
+          {formatCurrency(props.invoice.amount)}
+        </div>
       </td>
       <td className={`${base} text-center tabular-nums`}>
         {formatDate(props.invoice.issueDate)}
@@ -26,13 +29,15 @@ export default function InvoiceRow(props: InvoiceRowProps) {
       <td className={`${base} text-center tabular-nums`}>
         {formatDate(props.invoice.dueDate)}
       </td>
-      <td className={`${base} text-center ${situationClass(props.invoice.situation)}`}>
+      <td
+        className={`${base} text-center ${situationClass(props.invoice.situation)}`}
+      >
         {situationLabel(props.invoice.situation)}
       </td>
       <td className={`${base} px-0 text-center`}>
         <button
-          className='px-4 py-2 border border-border rounded-control cursor-pointer hover:bg-surface-raised focus-visible:outline-2 focus-visible:outline-primary'
-          type='button'
+          className="px-4 py-2 border border-border rounded-control cursor-pointer hover:bg-surface-raised focus-visible:outline-2 focus-visible:outline-primary"
+          type="button"
           onClick={() => props.edit(props.invoice)}
         >
           Alterar
