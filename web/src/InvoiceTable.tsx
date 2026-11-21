@@ -1,5 +1,5 @@
-import InvoiceRow from './InvoiceRow.tsx';
-import type { Invoice } from './invoiceType.ts';
+import InvoiceRow from "./InvoiceRow.tsx";
+import type { Invoice } from "./invoiceType.ts";
 
 interface InvoiceTableProps {
   invoices: Invoice[];
@@ -7,14 +7,14 @@ interface InvoiceTableProps {
 }
 
 export default function InvoiceTable(props: InvoiceTableProps) {
-  const base = 'text-sm font-medium p-3 border-b border-border text-text-muted';
+  const base = "text-sm font-medium p-3 border-b border-border text-text-muted";
 
   return (
-    <table className='w-full border-collapse'>
+    <table className="w-full border-collapse">
       <thead>
         <tr>
           <th className={`${base} text-left`}>Cliente</th>
-          <th className={`${base} text-left`}>Valor</th>
+          <th className={`${base} text-center`}>Valor</th>
           <th className={base}>Data da emissão</th>
           <th className={base}>Data de vencimento</th>
           <th className={base}>Situação</th>
@@ -23,13 +23,9 @@ export default function InvoiceTable(props: InvoiceTableProps) {
       </thead>
       <tbody>
         {props.invoices.map((invoice) => (
-          <InvoiceRow
-            key={invoice.id}
-            invoice={invoice}
-            edit={props.edit}
-          />
+          <InvoiceRow key={invoice.id} invoice={invoice} edit={props.edit} />
         ))}
       </tbody>
-    </table >
+    </table>
   );
 }
