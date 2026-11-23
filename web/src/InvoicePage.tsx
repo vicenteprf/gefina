@@ -128,9 +128,9 @@ export default function InvoicePage() {
     }
   }
 
-  if (loading) return <p>carregando faturas...</p>;
+  if (loading) return <p className='text-sm text-text-muted'>carregando...</p>;
 
-  if (error) return <p>{error}</p>;
+  if (error) return <p className='text-overdue'>{error}</p>;
 
   return (
     <>
@@ -150,7 +150,7 @@ export default function InvoicePage() {
       </div>
 
       <dialog
-        className="invoice-modal"
+        className='m-auto w-xl bg-surface backdrop:bg-background-brackdrop backdrop:backdrop-blur-xs border border-border text-text p-6 rounded-dialog focus-visible:outline-2 focus-visible:outline-primary'
         ref={dialogRef}
         onClose={() => {
           setDialogContent(false);

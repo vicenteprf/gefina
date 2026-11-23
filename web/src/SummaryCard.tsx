@@ -1,4 +1,4 @@
-import type { SummaryCardProps } from './dashboardType.ts';
+import type { SummaryCardProps } from "./dashboardType.ts";
 
 export default function SummaryCard(props: SummaryCardProps) {
   return (
