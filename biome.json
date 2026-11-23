@@ -13,7 +13,7 @@
   },
   "css": {
     "parser": {
-      "tailwindDirectives": null
+      "tailwindDirectives": true
     },
     "formatter": {
       "quoteStyle": "single"

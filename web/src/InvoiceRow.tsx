@@ -26,13 +26,15 @@ export default function InvoiceRow(props: InvoiceRowProps) {
       <td className={`${base} text-center tabular-nums`}>
         {formatDate(props.invoice.dueDate)}
       </td>
-      <td className={`${base} text-center ${situationClass(props.invoice.situation)}`}>
+      <td
+        className={`${base} text-center ${situationClass(props.invoice.situation)}`}
+      >
         {situationLabel(props.invoice.situation)}
       </td>
       <td className={`${base} px-0 text-center`}>
         <button
-          className='px-4 py-2 border border-border rounded-control cursor-pointer hover:bg-surface'
-          type='button'
+          className="px-4 py-2 border border-border rounded-control cursor-pointer hover:bg-surface"
+          type="button"
           onClick={() => props.edit(props.invoice)}
         >
           Alterar
