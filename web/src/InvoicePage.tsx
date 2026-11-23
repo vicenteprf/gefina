@@ -134,18 +134,18 @@ export default function InvoicePage() {
 
   return (
     <>
-      <header className='flex justify-between items-center mb-6'>
-        <h1 className='text-xl font-semibold'>Faturas</h1>
+      <header className="flex justify-between items-center mb-6">
+        <h1 className="text-xl font-semibold">Faturas</h1>
         <button
-          className="bg-primary px-4 py-2 rounded-control cursor-pointer focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-primary focus-visible:outline-offset-2"
-          type='button'
+          className="bg-primary px-4 py-2 rounded-control cursor-pointer"
+          type="button"
           onClick={() => openDialog(null)}
         >
           Nova fatura
         </button>
       </header>
 
-      <div className='p-4 bg-surface border border-border rounded-surface'>
+      <div className="p-4 bg-surface border border-border rounded-surface">
         <InvoiceTable invoices={invoices} edit={openDialog} />
       </div>
 
