@@ -18,7 +18,10 @@ export default function InvoiceRow(props: InvoiceRowProps) {
     <tr>
       <td className={base}>{props.invoice.customer.name}</td>
       <td className={`${base} tabular-nums`}>
-        {formatCurrency(props.invoice.amount)}
+        <div className="flex justify-between">
+          <span>R$</span>
+          {formatCurrency(props.invoice.amount)}
+        </div>
       </td>
       <td className={`${base} text-center tabular-nums`}>
         {formatDate(props.invoice.issueDate)}
