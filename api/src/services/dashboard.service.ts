@@ -1,10 +1,10 @@
-import type { Dashboard } from './dashboardType.ts';
-import type { InvoiceStatus } from './invoice.schema.ts';
+import prisma from '../prisma.ts';
+import type { InvoiceStatus } from '../schemas/invoice.schema.ts';
+import type { Dashboard } from '../types/dashboardType.ts';
 import {
   findOverdueInvoices,
   findRecentInvoice,
 } from './invoice.service.ts';
-import prisma from './prisma.ts';
 
 async function sumAmountByStatus(
   status: InvoiceStatus,

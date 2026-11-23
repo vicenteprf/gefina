@@ -1,14 +1,14 @@
 import type { Invoice as InvoiceRecord } from '@prisma/client';
+import prisma from '../prisma.ts';
 import type {
   InvoiceInput,
   InvoiceStatus,
-} from './invoice.schema.ts';
+} from '../schemas/invoice.schema.ts';
 import type {
   Invoice,
   InvoiceSituation,
   InvoiceWithCustomer,
-} from './invoiceType.ts';
-import prisma from './prisma.ts';
+} from '../types/invoiceType.ts';
 
 function formatInvoice(record: InvoiceWithCustomer): Invoice {
   const situation: InvoiceSituation =

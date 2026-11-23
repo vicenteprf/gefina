@@ -1,13 +1,16 @@
 import { Router } from 'express';
-import { invoiceSchema, toFieldErrors } from './invoice.schema.ts';
+import {
+  invoiceSchema,
+  toFieldErrors,
+} from '../schemas/invoice.schema.ts';
 import {
   findAllInvoice,
   findInvoiceById,
   insertInvoice,
   modifyInvoice,
   removeInvoice,
-} from './invoice.service.ts';
-import parseId from './utils.ts';
+} from '../services/invoice.service.ts';
+import parseId from '../utils.ts';
 
 const router = Router();
 

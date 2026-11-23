@@ -17,12 +17,12 @@ describe('InvoiceForm', () => {
         ]}
         error={null}
         fieldErrors={{}}
-        onDelete={() => { }}
+        onDelete={() => {}}
         confirmDelete={false}
-        setConfirmDelete={() => { }}
-        confirm={() => { }}
-        onCancel={() => { }}
-        onSubmit={() => { }}
+        setConfirmDelete={() => {}}
+        confirm={() => {}}
+        onCancel={() => {}}
+        onSubmit={() => {}}
         busy={false}
       />,
     );
@@ -49,11 +49,11 @@ describe('InvoiceForm', () => {
         ]}
         error={null}
         fieldErrors={{}}
-        onDelete={() => { }}
+        onDelete={() => {}}
         confirmDelete={false}
-        setConfirmDelete={() => { }}
-        confirm={() => { }}
-        onCancel={() => { }}
+        setConfirmDelete={() => {}}
+        confirm={() => {}}
+        onCancel={() => {}}
         onSubmit={onSubmit}
         busy={false}
       />,
@@ -101,11 +101,11 @@ describe('InvoiceForm', () => {
           issueDate: 'A data de emissão deve ser uma data válida.',
           dueDate: 'A data de vencimento deve ser uma data válida.',
         }}
-        onDelete={() => { }}
+        onDelete={() => {}}
         confirmDelete={false}
-        setConfirmDelete={() => { }}
-        confirm={() => { }}
-        onCancel={() => { }}
+        setConfirmDelete={() => {}}
+        confirm={() => {}}
+        onCancel={() => {}}
         onSubmit={onSubmit}
         busy={false}
       />,
@@ -141,12 +141,12 @@ describe('InvoiceForm', () => {
         ]}
         error={null}
         fieldErrors={{}}
-        onDelete={() => { }}
+        onDelete={() => {}}
         confirmDelete={false}
-        setConfirmDelete={() => { }}
-        confirm={() => { }}
-        onCancel={() => { }}
-        onSubmit={() => { }}
+        setConfirmDelete={() => {}}
+        confirm={() => {}}
+        onCancel={() => {}}
+        onSubmit={() => {}}
         busy={true}
       />,
     );
@@ -172,12 +172,12 @@ describe('InvoiceForm', () => {
         ]}
         error={'Falha ao criar fatura.'}
         fieldErrors={{}}
-        onDelete={() => { }}
+        onDelete={() => {}}
         confirmDelete={false}
-        setConfirmDelete={() => { }}
-        confirm={() => { }}
-        onCancel={() => { }}
-        onSubmit={() => { }}
+        setConfirmDelete={() => {}}
+        confirm={() => {}}
+        onCancel={() => {}}
+        onSubmit={() => {}}
         busy={false}
       />,
     );
@@ -210,12 +210,12 @@ describe('InvoiceForm', () => {
         ]}
         error={null}
         fieldErrors={{}}
-        onDelete={() => { }}
+        onDelete={() => {}}
         confirmDelete={false}
-        setConfirmDelete={() => { }}
-        confirm={() => { }}
-        onCancel={() => { }}
-        onSubmit={() => { }}
+        setConfirmDelete={() => {}}
+        confirm={() => {}}
+        onCancel={() => {}}
+        onSubmit={() => {}}
         busy={false}
       />,
     );
@@ -262,10 +262,10 @@ describe('InvoiceForm', () => {
         ]}
         error={null}
         fieldErrors={{}}
-        onDelete={() => { }}
+        onDelete={() => {}}
         confirmDelete={false}
-        setConfirmDelete={() => { }}
-        confirm={() => { }}
+        setConfirmDelete={() => {}}
+        confirm={() => {}}
         onCancel={onCancel}
         onSubmit={onSubmit}
         busy={false}

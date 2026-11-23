@@ -1,16 +1,22 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import express from 'express';
-import customers from './customers.route.ts';
-import dashboard from './dashboard.route.ts';
-import handleError from './error.middlewares.ts';
-import invoices from './invoice.route.ts';
+import handleError from './middlewares/error.middlewares.ts';
 import prisma from './prisma.ts';
+import customers from './routes/customers.route.ts';
+import dashboard from './routes/dashboard.route.ts';
+import invoices from './routes/invoice.route.ts';
 
 const app = express();
 app.use(express.json());
 
-const dist = path.join(import.meta.dirname, '..', 'web', 'dist');
+const dist = path.join(
+  import.meta.dirname,
+  '..',
+  '..',
+  'web',
+  'dist',
+);
 
 app.use((req, _res, next) => {
   console.log(`${req.method} ${req.url}`);

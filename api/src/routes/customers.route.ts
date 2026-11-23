@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { findCustomersOptions } from './customers.service.ts';
+import { findCustomersOptions } from '../services/customers.service.ts';
 
 const router = Router();
 
