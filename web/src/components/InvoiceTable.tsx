@@ -1,5 +1,5 @@
-import InvoiceRow from "./InvoiceRow.tsx";
-import type { Invoice } from "./invoiceType.ts";
+import type { Invoice } from '../types/invoiceType.ts';
+import InvoiceRow from './InvoiceRow.tsx';
 
 interface InvoiceTableProps {
   invoices: Invoice[];
@@ -24,7 +24,11 @@ export default function InvoiceTable(props: InvoiceTableProps) {
       </thead>
       <tbody>
         {props.invoices.map((invoice) => (
-          <InvoiceRow key={invoice.id} invoice={invoice} edit={props.edit} />
+          <InvoiceRow
+            key={invoice.id}
+            invoice={invoice}
+            edit={props.edit}
+          />
         ))}
       </tbody>
     </table>

@@ -1,5 +1,5 @@
-import type { CustomerOption } from './customersType.ts';
-import prisma from './prisma.ts';
+import prisma from '../prisma.ts';
+import type { CustomerOption } from '../types/customersType.ts';
 
 export async function findCustomersOptions(): Promise<
   CustomerOption[]

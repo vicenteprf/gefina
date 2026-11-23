@@ -2,7 +2,7 @@ import type {
   Customer as CustomerRecord,
   Invoice as InvoiceRecord,
 } from '@prisma/client';
-import type { InvoiceStatus } from './invoice.schema.ts';
+import type { InvoiceStatus } from '../schemas/invoice.schema.ts';
 
 export type InvoiceSituation = 'paid' | 'pending' | 'overdue';
 
