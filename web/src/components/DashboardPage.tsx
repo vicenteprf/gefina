@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import type { Dashboard } from "./dashboardType.ts";
-import InvoiceSummaryTable from "./InvoiceSummaryTable.tsx";
-import SummaryCard from "./SummaryCard.tsx";
-import { formatCurrency } from "./utils.ts";
+import { useEffect, useState } from 'react';
+import type { Dashboard } from '../types/dashboardType.ts';
+import { formatCurrency } from '../utils.ts';
+import InvoiceSummaryTable from './InvoiceSummaryTable.tsx';
+import SummaryCard from './SummaryCard.tsx';
 
 export default function DashboardPage() {
   const [dashboard, setDashboard] = useState<null | Dashboard>(null);
@@ -12,10 +12,10 @@ export default function DashboardPage() {
   useEffect(() => {
     async function getDashboard() {
       try {
-        const response = await fetch("/api/dashboard");
+        const response = await fetch('/api/dashboard');
 
         if (!response.ok) {
-          setError("Não foi possível carregar o painel inicial.");
+          setError('Não foi possível carregar o painel inicial.');
           setLoading(false);
           return;
         }
@@ -25,7 +25,7 @@ export default function DashboardPage() {
       } catch (e) {
         console.error(e);
 
-        setError("Não foi possível carregar o painel inicial.");
+        setError('Não foi possível carregar o painel inicial.');
       }
 
       setLoading(false);
@@ -33,7 +33,8 @@ export default function DashboardPage() {
     getDashboard();
   }, []);
 
-  if (loading) return <p className="text-sm text-text-muted">carregando...</p>;
+  if (loading)
+    return <p className="text-sm text-text-muted">carregando...</p>;
 
   if (error !== null || dashboard === null)
     return <p className="text-overdue">{error}</p>;

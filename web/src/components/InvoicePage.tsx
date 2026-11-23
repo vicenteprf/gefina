@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import type { CustomerOption } from './customerType.ts';
-import InvoiceForm from './InvoiceForm.tsx';
-import InvoiceTable from './InvoiceTable.tsx';
 import {
   createInvoice,
   deleteInvoice,
   getAllInvoices,
   updateInvoice,
-} from './invoiceApi.ts';
+} from '../requests/invoiceApi.ts';
+import type { CustomerOption } from '../types/customerType.ts';
 import type {
   Invoice,
   InvoiceFieldErrors,
   InvoiceInput,
-} from './invoiceType.ts';
+} from '../types/invoiceType.ts';
+import InvoiceForm from './InvoiceForm.tsx';
+import InvoiceTable from './InvoiceTable.tsx';
 
 export default function InvoicePage() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -128,9 +128,10 @@ export default function InvoicePage() {
     }
   }
 
-  if (loading) return <p className='text-sm text-text-muted'>carregando...</p>;
+  if (loading)
+    return <p className="text-sm text-text-muted">carregando...</p>;
 
-  if (error) return <p className='text-overdue'>{error}</p>;
+  if (error) return <p className="text-overdue">{error}</p>;
 
   return (
     <>
@@ -150,7 +151,7 @@ export default function InvoicePage() {
       </div>
 
       <dialog
-        className='m-auto w-xl bg-surface backdrop:bg-background-brackdrop backdrop:backdrop-blur-xs border border-border text-text p-6 rounded-dialog focus-visible:outline-2 focus-visible:outline-primary'
+        className="m-auto w-xl bg-surface backdrop:bg-background-brackdrop backdrop:backdrop-blur-xs border border-border text-text p-6 rounded-dialog focus-visible:outline-2 focus-visible:outline-primary"
         ref={dialogRef}
         onClose={() => {
           setDialogContent(false);
